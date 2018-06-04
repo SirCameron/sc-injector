@@ -7,9 +7,9 @@ I'm sure there are other solutions - maybe even some better or some standard one
 # Use
 
 ```
-var injector = require('injector');
+var injector = require('sc-injector');
 // or
-import injector from 'injector'
+import injector from 'sc-injector'
 
 injector.set('something', function(){
 	return 'something';
@@ -24,6 +24,9 @@ var something = injector.inject('something')
 
 var class = injector.inject('someclass')
 // same instance of Class
+
+var classAgain = injector.inject('someclass')
+// same instance again... 
 ```
 
 # Basic Autoloading
