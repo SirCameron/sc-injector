@@ -1,10 +1,10 @@
-##Why
+## Why
 mostly because I like to ensure I'm getting the same instance of something I create across my app.
 And also, because I hate having to refer to modules I'm importing by their path each time.
 
 I'm sure there are other solutions - maybe even some better or some standard ones - but I like this approach and thought others could use it.
 
-#Use
+# Use
 
 ```
 var injector = require('injector');
@@ -26,7 +26,7 @@ var class = injector.inject('someclass')
 // same instance of Class
 ```
 
-#Basic Autoloading
+# Basic Autoloading
 ```
 injector.configure({
 	autoload: {enable: true, basePath: __dirname}
