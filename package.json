@@ -9,7 +9,7 @@
   "scripts": {
     "test": "mocha test/**/**.test.js"
   },
-  "keywords": [],
+  "keywords": ["injector","dependency injection"],
   "author": "Cameron McAlpine",
   "license": "ISC",
   "devDependencies": {
