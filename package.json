@@ -1,5 +1,5 @@
 {
-  "name": "js-injector",
+  "name": "sc-injector",
   "version": "1.0.0",
   "description": "A simple injector",
   "main": "index.js",
