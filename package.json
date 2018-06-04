@@ -1,6 +1,6 @@
 {
   "name": "sc-injector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple injector",
   "main": "index.js",
   "directories": {
@@ -9,7 +9,10 @@
   "scripts": {
     "test": "mocha test/**/**.test.js"
   },
-  "keywords": ["injector","dependency injection"],
+  "keywords": [
+    "injector",
+    "dependency injection"
+  ],
   "author": "Cameron McAlpine",
   "license": "ISC",
   "devDependencies": {
