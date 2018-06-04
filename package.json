@@ -1,16 +1,16 @@
 {
   "name": "injector",
   "version": "1.0.0",
-  "description": "Use",
+  "description": "A simple injector",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/**/**.js"
+    "test": "mocha test/**/**.test.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Cameron McAlpine",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.1.2",
