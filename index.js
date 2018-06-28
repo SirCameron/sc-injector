@@ -70,4 +70,4 @@ class Injector {
 	}
 }
 
-module.exports.injector = new Injector()
+module.exports = new Injector()
