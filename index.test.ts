@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { DependencyInjector } from "./index";
+import { injector, DependencyInjector } from "./index";
 
 describe("DependencyInjector", () => {
   class TestService {

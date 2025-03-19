@@ -1,7 +1,7 @@
 {
   "name": "sc-injector",
-  "version": "0.0.1",
-  "description": "A simple typed injector",
+  "version": "0.0.2",
+  "description": "A simple typed dependency injector",
   "main": "dist/index.js",
   "scripts": {
     "test": "vitest",

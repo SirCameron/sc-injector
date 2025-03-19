@@ -28,3 +28,5 @@ export class DependencyInjector {
     return this.instances.get(key) as T;
   }
 }
+
+export const injector = new DependencyInjector();
