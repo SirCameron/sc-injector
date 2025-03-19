@@ -1,73 +1,27 @@
-let configuration = {
-	autoload: {
-		enable: false,
-		basePath: './'
-	}
-}
-
-function __configure(config, _configuration){
-	Object.keys(config).map(function(key){
-		if (typeof config[key] == 'object' && Object.keys(config[key]).length > 0){
-			if (!(key in _configuration)){
-				_configuration[key] = config[key]	
-			}
-			else{
-				__configure(config[key], _configuration[key])
-			}
-		}
-		else{
-			if (key in _configuration){
-				_configuration[key] = config[key]
-			}
-		}
-	})
-}
-
-class Injector {
-	constructor(){
-		this.factories = {}
-		this.instances = {}
-	}
-	
-	configure(config){
-		__configure(config, configuration)
-	}
-
-	getConfig(){
-		return configuration
-	}
-
-	inject(key){
-		if (key in this.instances){
-			return this.instances[key]
-		}
-		if (key in this.factories){
-			if (typeof this.factories[key] == 'function'){
-				this.instances[key] = this.factories[key](this)	
-			}
-			else{
-				this.instances[key] = this.factories[key]
-			}
-			return this.instances[key]
-		}
-
-		// if (configuration.autoload.enable){
-		// 	try{
-		// 		var dependency = require(configuration.autoload.basePath + '/' + key)
-		// 		this.instances[key] = dependency
-		// 		return dependency
-		// 	}
-		// 	catch(e){
-		// 		throw new Error('Unable to autoload "' + key + '" in "' + configuration.autoload.basePath + '"')
-		// 	}
-		// }
-
-		throw new Error('Nothing found for "' + key + '"')
-	}
-
-	set(key, func){
-		this.factories[key] = func
-	}
-}
-
-module.exports = new Injector()
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DependencyInjector = void 0;
+var DependencyInjector = /** @class */ (function () {
+    function DependencyInjector() {
+        this.factories = new Map();
+        this.instances = new Map();
+    }
+    DependencyInjector.prototype.set = function (key, factory) {
+        if (!this.factories.has(key)) {
+            this.factories.set(key, factory);
+        }
+    };
+    DependencyInjector.prototype.get = function (key) {
+        if (!this.instances.has(key)) {
+            var factory = this.factories.get(key);
+            if (!factory) {
+                throw new Error("No factory found for key: ".concat(typeof key === "string" ? key : key.name));
+            }
+            var instance = factory();
+            this.instances.set(key, instance);
+        }
+        return this.instances.get(key);
+    };
+    return DependencyInjector;
+}());
+exports.DependencyInjector = DependencyInjector;

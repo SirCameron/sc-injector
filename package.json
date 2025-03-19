@@ -1,13 +1,11 @@
 {
   "name": "sc-injector",
-  "version": "1.0.1",
-  "description": "A simple injector",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "version": "0.0.1",
+  "description": "A simple typed injector",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "mocha test/**/**.test.js"
+    "test": "vitest",
+    "build": "tsc"
   },
   "keywords": [
     "injector",
@@ -16,8 +14,10 @@
   "author": "Cameron McAlpine",
   "license": "ISC",
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0"
+    "tsc": "^2.0.4",
+    "typescript": "^5.8.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "vitest": "^3.0.9"
+  }
 }

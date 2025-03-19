@@ -1,41 +1,57 @@
 ## Why
-mostly because I like to ensure I'm getting the same instance of something I create across my app.
-And also, because I hate having to refer to modules I'm importing by their path each time.
 
-I'm sure there are other solutions - maybe even some better or some standard ones - but I like this approach and thought others could use it.
+Because I like it, really.
+I know modules are essentially singletons in JS anyway, but instantiating them with config, sometimes with env vars, is often uncomfortable.
+This is nice.
 
 # Use
 
 ```
-var injector = require('sc-injector');
-// or
-import injector from 'sc-injector'
+// Setting up the dependency injector
+const di = new DependencyInjector();
+di.set(Config, () => new Config());
+di.set(HttpClient, () => new HttpClient(di.get(Config)));
+di.set(UserService, () => new UserService(di.get(HttpClient)));
+di.set(ProductService, () => new ProductService(di.get(HttpClient)));
 
-injector.set('something', function(){
-	return 'something';
-})
+// Usage examples
+const config = di.get(Config);
+const httpClient = di.get(HttpClient);
+const userService = di.get(UserService);
+const productService = di.get(ProductService);
 
-injector.set('someclass', function(){
-	return new Class();
-})
+// Setting and getting an object directly
+const someObject = { name: "example" };
+di.set("someObject", () => someObject);
+const retrievedObject = di.get("someObject");
+console.log(retrievedObject); // { name: 'example' }
 
-var something = injector.inject('something')
-// 'something'
+// Example classes
+class Config {
+  apiUrl: string = "https://api.example.com";
+}
 
-var class = injector.inject('someclass')
-// same instance of Class
+class HttpClient {
+  constructor(private config: Config) {}
 
-var classAgain = injector.inject('someclass')
-// same instance again... 
-```
+  get(url: string): Promise<Response> {
+    return fetch(`${this.config.apiUrl}${url}`);
+  }
+}
 
-# Basic Autoloading
-```
-injector.configure({
-	autoload: {enable: true, basePath: __dirname}
-})
+class UserService {
+  constructor(private httpClient: HttpClient) {}
 
-var bla = injector.inject('somepath/somedir/module.js')
-// or
-var bla = injector.inject('somepath/somedir'); // where somedir has within it an index.js 
+  getUser(id: number): Promise<Response> {
+    return this.httpClient.get(`/users/${id}`);
+  }
+}
+
+class ProductService {
+  constructor(private httpClient: HttpClient) {}
+
+  getProduct(id: number): Promise<Response> {
+    return this.httpClient.get(`/products/${id}`);
+  }
+}
 ```
